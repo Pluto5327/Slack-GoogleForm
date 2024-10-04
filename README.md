@@ -1,2 +1,2 @@
 # GAS_Slack
-Connects GAS with Slack to publish
+Connects GAS with Slack for publishing purposes using Slack API
