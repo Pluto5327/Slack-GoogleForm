@@ -1,6 +1,7 @@
 const SLACK_TOKEN = PropertiesService.getScriptProperties().getProperty ('SLACK_TOKEN_1');
 const OTHER_FORM_ID = PropertiesService.getScriptProperties().getProperty('OTHER_FORM_ID_1');
-const channelId = PropertiesService.getScriptProperties().getProperty('channel_ID')
+const CHANNEL_ID = PropertiesService.getScriptProperties().getProperty('channel_ID')
+
 
 /**
  * メッセージ本文を作成します。
@@ -11,7 +12,7 @@ function createMessageBody(itemResponses) {
   itemResponses.forEach((response) => {
     const question = response.getItem().getTitle();
     const answer = response.getResponse();
-    body += "\n\n【" + question + "】\n\n" + answer;
+    body += `\n\n【${question}】\n\n${answer}`;
   });
 
   return body;
@@ -140,7 +141,7 @@ function getSlackUserIdByEmail(email) {
  */
 function sendSlackMessage(body) {
   const url = "https://slack.com/api/chat.postMessage";
-  
+
   const options = {
     method: "post",
     contentType: "application/json",
@@ -148,7 +149,7 @@ function sendSlackMessage(body) {
       Authorization: `Bearer ${SLACK_TOKEN}`
     },
     payload: JSON.stringify({
-      channel: channelId,
+      channel: CHANNEL_ID,
       text: body
     })
   };
